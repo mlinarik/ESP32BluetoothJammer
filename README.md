@@ -10,31 +10,14 @@ This code repository is for educational purposes only! DO NOT use a signal jammi
 
 ## Parts List
 
-Build your device on a breadboard or perfboard.
-
-All the parts needed are listed below with links to buy them from AliExpress or Amazon.
-
-#### Parts on AliExpress
+Build your device on a breadboard or perfboard. All the parts needed are listed below with a link to buy them on AliExpress.
 
 - [ESP32 Dev Board](https://s.click.aliexpress.com/e/_oBzks2E)
 - [2x NRF24L01+PA+LNA](https://s.click.aliexpress.com/e/_okUsZpp)
+- [2x Capacitor (10µF – 47µF)](https://s.click.aliexpress.com/e/_olkWSDz)
 - [Breadboard](https://s.click.aliexpress.com/e/_on6KzoP)
 - [Jumper Wires](https://s.click.aliexpress.com/e/_ooo7z5h)
-- [2x Capacitor (10µF – 47µF)](https://s.click.aliexpress.com/e/_olkWSDz)
-
-
-- [Power Bank](https://s.click.aliexpress.com/e/_oneC3BV) **or** [3.7v Battery & Charger](https://s.click.aliexpress.com/e/_oElYgVl)
-
-#### Parts on Amazon (affiliate links)
-
-- [ESP32 Dev Board](https://amzn.to/4j8IFjW)
-- [2x NRF24L01+PA+LNA](https://amzn.to/43nGRhg)
-- [Breadboard](https://amzn.to/4k4pFEF)
-- [Jumper Wires](https://amzn.to/45fErUf)
-- [2x Capacitor (10µF – 47µF)](https://amzn.to/4kvqo1v)
-
-
-- [Power Bank](https://amzn.to/43eFnqV) **or** [3.7v Battery](https://amzn.to/3SHqebj) + [Charger](https://amzn.to/4k1NNrt)
+- [Power Bank](https://s.click.aliexpress.com/e/_oneC3BV)
 
 ## Wiring Diagrams
 
@@ -44,15 +27,15 @@ Follow the wiring below using the same pins and the code will work out of the bo
 
 ## Uploading
 
-Follow the wiring diagram and upload this code to your device use the Arduino IDE with ESP32 support and RF24 library installed.
+Upload this code to your ESP32. Recommended method using Arduino IDE:
 
-1. [Download the Arduino IDE](https://www.arduino.cc/en/software).
+1. Download the latest [Arduino IDE](https://www.arduino.cc/en/software).
 
-2. Install Arduino-ESP32 support. [Full guide found here](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html).
+2. Install ESP32 board support from Espressif Systems ([Full guide found here](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html)).
 
-3. Install `RF24 (by TMRh20)` from library manager.
+3. Install `RF24 by TMRh20` from the library manager.
 
-4. Open the `BluetoothJammer.imo` file, plugin your ESP32, select your port/board and click upload.
+4. Open the `BluetoothJammer/BluetoothJammer.imo` file, connect your ESP32, select the port/board and then click upload.
 
 ## Contributing
 
@@ -60,4 +43,4 @@ Pull requests are welcome. Please open an issue if you find any problems.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)
