@@ -23,15 +23,15 @@ Build your device on a breadboard or perfboard. All the parts needed are listed 
 
 Follow the wiring below using the same pins and the code will work out of the box with no adjustments needed. Plug the antenna in before powering the NRF24L01 module! Otherwise the amplifier will be burned out.
 
-<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/images/wiring-breadboard.png" width="1000" alt="Breadboard Wiring Diagram">
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/Images/wiring-breadboard.png" width="1000" alt="Breadboard Wiring Diagram">
 
 ## Photos
 
 ### Working Breadboard Prototype
 
-<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/images/prototype-1.jpg" width="500" alt="Breadboard Prototype 1">
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/Images/prototype-1.jpg" width="500" alt="Breadboard Prototype 1">
 
-<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/images/prototype-2.jpg" width="500" alt="Breadboard Prototype 2">
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/Images/prototype-2.jpg" width="500" alt="Breadboard Prototype 2">
 
 ## Uploading
 
