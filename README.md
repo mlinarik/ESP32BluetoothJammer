@@ -2,7 +2,7 @@
 
 Build a Bluetooth signal jamming device using the Arduino code and schematics here.
 
-This setup uses an ESP32 dev board for the MCU and 2x NRF24L01 radio transmitters for transmitting. It can easily be tweaked to interfere with anything that uses the 2.4GHz band (WiFi, RC toys, drones etc).
+The default setup uses an ESP32 dev board for the MCU and 2x NRF24L01 radio transmitters for transmitting. It can easily be tweaked to interfere with anything that uses the 2.4GHz band (WiFi, RC toys, drones etc).
 
 ## ⚠️ LEGAL WARNING
 
@@ -19,11 +19,19 @@ Build your device on a breadboard or perfboard. All the parts needed are listed 
 - [Jumper Wires](https://s.click.aliexpress.com/e/_ooo7z5h)
 - [Power Bank](https://s.click.aliexpress.com/e/_oneC3BV)
 
-## Wiring Diagrams
+## Wiring Diagram
 
-Follow the wiring below using the same pins and the code will work out of the box with no adjustments needed.
+Follow the wiring below using the same pins and the code will work out of the box with no adjustments needed. Plug the antenna in before powering the NRF24L01 module! Otherwise the amplifier will be burned out.
 
-![Breadboard Wiring Diagram](https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/wiring-breadboard.png "Breadboard Wiring Diagram")
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/images/wiring-breadboard.png" width="1000" alt="Breadboard Wiring Diagram">
+
+## Photos
+
+### Working Breadboard Prototype
+
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/images/prototype-1.jpg" width="500" alt="Breadboard Prototype 1">
+
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/images/prototype-2.jpg" width="500" alt="Breadboard Prototype 2">
 
 ## Uploading
 

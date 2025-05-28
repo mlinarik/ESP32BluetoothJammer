@@ -40,14 +40,22 @@ uint8_t endCh2 = num_channels - 1;
 bool classicMode = false;
 bool jammingOn = false;
 unsigned long lastHopTime = 0;
-const unsigned long hopInterval = 300;  // microseconds
+unsigned long lastOutputTime = 0;
+unsigned long hopInterval = 50;  // microseconds
+unsigned long hopCount = 0;
 
 bool buttonState = HIGH;
 bool lastButtonState = HIGH;
 
+// Data to transmit
+uint8_t payload[32];
+
 void setup() {
   // Give ESP32 extra time to start up
   delay(2000);
+
+  // Generate random payload
+  for (uint8_t i = 0; i < 32; i++) payload[i] = random(256);
 
   // Bluetooth classic channels (2402–2480 MHz) - NRF24L01 channels are the same plus 2 MHz
   for (int i = 0; i < 79; i++) {  
@@ -69,27 +77,41 @@ void setup() {
   while (!radio1.begin()) {
     Serial.println("Radio 1 init failed. Check wiring.");
 
-    // Recheck radio every 5 seconds
-    delay(5000);
     if(radio1.failureDetected) {
       radio1.begin();                          // Attempt to re-configure the radio with defaults
       radio1.failureDetected = 0;              // Reset the detection value
+      
+      // Recheck radio every 5 seconds and blink LED
+      delay(2500);
+      digitalWrite(LED_PIN, LOW);
+      delay(2500);
+      digitalWrite(LED_PIN, HIGH);
     }
   }
   while (!radio2.begin()) {
     Serial.println("Radio 2 init failed. Check wiring.");
 
-    // Recheck radio every 5 seconds
-    delay(5000);
     if(radio2.failureDetected) {
       radio2.begin();                          // Attempt to re-configure the radio with defaults
       radio2.failureDetected = 0;              // Reset the detection value
+
+      // Recheck radio every 5 seconds and blink LED
+      delay(2500);
+      digitalWrite(LED_PIN, LOW);
+      delay(2500);
+      digitalWrite(LED_PIN, HIGH);
     }
   }
 
   // Configure radio modules settings
   setupRadio(radio1);
   setupRadio(radio2);
+
+  radio1.setChannel(ble_channels[0]);
+  radio2.setChannel(ble_channels[1]);
+
+  radio1.startConstCarrier(RF24_PA_MAX, ble_channels[0]);
+  radio2.startConstCarrier(RF24_PA_MAX, ble_channels[1]);
 
   // if(radio1.isPVariant()) { Serial.println("Radio 1 is PVariant"); }else{ Serial.println("Radio 1 is NOT PVariant"); }
   // if(radio2.isPVariant()) { Serial.println("Radio 2 is PVariant"); }else{ Serial.println("Radio 2 is NOT PVariant"); }
@@ -105,7 +127,7 @@ void setupRadio(RF24& radio) {
   radio.setRetries(0, 0);                 // No retries
   radio.disableCRC();                     // Disable CRC validation
   radio.setDataRate(RF24_2MBPS);          // High rate to increase traffic
-  radio.setPALevel(RF24_PA_MAX, 0);       // Max power
+  radio.setPALevel(RF24_PA_MAX, true);    // Max power
   radio.setChannel(ble_channels[0]);      // Start on first channel
   radio.setPayloadSize(32);               // Standard BLE packet size
   radio.stopListening();                  // Transmit mode
@@ -123,13 +145,20 @@ void setClasicMode() {
   startCh2 = split_index;
   endCh2 = num_channels - 1;
 
+  radio1.setChannel(bluetooth_channels[0]);
+  radio2.setChannel(bluetooth_channels[startCh2]);
+
+  radio1.startConstCarrier(RF24_PA_MAX,bluetooth_channels[0]);
+  radio2.startConstCarrier(RF24_PA_MAX, bluetooth_channels[startCh2]);
+
+  // Reset hop counter
+  hopCount = 0;
+
   // Classic mode flag
   classicMode = true;
 }
 
 void loop() {
-  static int hopCount = 0;
-
   // Get debugging info using serial monitor
   if (Serial.available() > 0) {
     String serialInput = Serial.readStringUntil('\n');
@@ -185,7 +214,13 @@ void loop() {
     lastHopTime = micros();
 
     // Debug output every 5 seconds
-    if (millis() - (micros() * 1000) >= 5000 && hopCount) {
+    if (millis() - lastOutputTime >= 5000 && hopCount) {
+      lastOutputTime = millis();
+
+      // Increasing hop interval to test different speeds
+      // hopInterval = hopInterval * 2;
+      // Serial.println("\nhopInterval = " + String(hopInterval) + "\n");
+
       Serial.print("Transmitted to");
       if(classicMode) {
         Serial.print(" classic");
@@ -201,10 +236,6 @@ void loop() {
 void sendRandomPacket() {
   static uint8_t ch1 = 0;
   static uint8_t ch2 = startCh2;
-
-  // Generate random payload
-  uint8_t payload[32];
-  for (uint8_t i = 0; i < 32; i++) payload[i] = random(256);
 
   if (classicMode) {
     // In classic mode each radio takes care of one half of the channels
@@ -227,6 +258,8 @@ void sendRandomPacket() {
   }
 
   // Transmit payload
-  radio1.startFastWrite(payload, sizeof(payload), true);
-  radio2.startFastWrite(payload, sizeof(payload), true);
+  // radio1.startFastWrite(&payload, sizeof(payload), true);
+  radio1.write(&payload, sizeof(payload));
+  // radio2.startFastWrite(&payload, sizeof(payload), true);
+  radio2.write(&payload, sizeof(payload));
 }
