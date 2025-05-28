@@ -29,7 +29,9 @@ Follow the wiring below using the same pins and the code will work out of the bo
 
 ### Working Breadboard Prototype
 
-<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/Images/prototype-1.jpg" width="500" alt="Breadboard Prototype 1" style="max-width:49%;margin-right:2%;"><img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/Images/prototype-2.jpg" width="500" alt="Breadboard Prototype 2" style="max-width:49%;">
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/Images/prototype-1.jpg" width="500" alt="Breadboard Prototype 1">
+
+<img src="https://github.com/stuthemoo/ESP32BluetoothJammer/raw/main/Images/prototype-2.jpg" width="500" alt="Breadboard Prototype 2">
 
 ## Uploading
 
